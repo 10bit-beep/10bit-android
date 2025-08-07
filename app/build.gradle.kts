@@ -63,14 +63,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.3")
     implementation("androidx.security:security-crypto:1.0.0")
-    // ⚙️ 네트워크 통신 (Retrofit)
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-// ⚙️ JSON 데이터 변환 (Gson)
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-// ⚙️ Compose UI에서 ViewModel 사용
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
-// ⚙️ Compose 생명주기를 고려한 데이터 관찰
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.3")
-// ⚙️ 안전한 데이터 저장 (EncryptedSharedPreferences)
     implementation("androidx.security:security-crypto:1.0.0")
 }
