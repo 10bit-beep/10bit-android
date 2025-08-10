@@ -17,7 +17,7 @@ data class LoginResponse(
 //수정 필요 (회원가입시 보낼 값)
 data class SignupRequest(
     @SerializedName("studentNumber") val studentNumber: Int,
-    @SerializedName("name")          val name: String,
+//    @SerializedName("name")          val name: String,
     @SerializedName("publicId")      val publicId: String,
     @SerializedName("password")      val password: String,
     @SerializedName("email")         val email: String

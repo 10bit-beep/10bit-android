@@ -23,7 +23,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -43,11 +42,7 @@ fun SignupScreen(
     val isLoading = signupState is SignupUiState.Loading
     val context = LocalContext.current
 
-    val isEmailVerified = signupState is SignupUiState.VerificationSuccess
-    val isCodeRequested = signupState is SignupUiState.CodeRequestSuccess || isEmailVerified
-
     val isFormValid = signupViewModel.studentId.value.isNotEmpty() &&
-            signupViewModel.name.value.isNotEmpty() &&
             signupViewModel.publicId.value.isNotEmpty() &&
             signupViewModel.password.value.isNotEmpty() &&
             signupViewModel.email.value.isNotEmpty()
@@ -62,12 +57,6 @@ fun SignupScreen(
                 Toast.makeText(context, state.message, Toast.LENGTH_LONG).show()
                 signupViewModel.resetStateToIdle()
             }
-            is SignupUiState.CodeRequestSuccess -> {
-                Toast.makeText(context, "인증 코드가 전송되었습니다.", Toast.LENGTH_SHORT).show()
-            }
-            is SignupUiState.VerificationSuccess -> {
-                Toast.makeText(context, "이메일 인증이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-            }
             else -> {}
         }
     }
@@ -80,7 +69,7 @@ fun SignupScreen(
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(Modifier.height(80.dp))
+        Spacer(Modifier.height(120.dp))
 
         Icon(
             painter = painterResource(id = R.drawable.beeplogo_icon),
@@ -89,17 +78,12 @@ fun SignupScreen(
         )
         Spacer(Modifier.height(40.dp))
 
-        SignupTextField(label = "아이디", value = signupViewModel.publicId.value, onValueChange = { signupViewModel.publicId.value = it }, placeholder = "아이디를 입력하세요", enabled = !isLoading && !isEmailVerified)
-        SignupTextField(label = "비밀번호", value = signupViewModel.password.value, onValueChange = { signupViewModel.password.value = it }, placeholder = "비밀번호를 입력하세요", isPassword = true, enabled = !isLoading && !isEmailVerified)
-        SignupTextField(label = "학번", value = signupViewModel.studentId.value, onValueChange = { signupViewModel.studentId.value = it }, placeholder = "학번을 입력하세요 (예: 2411)", keyboardType = KeyboardType.Number, enabled = !isLoading && !isEmailVerified)
-        SignupTextField(label = "이름", value = signupViewModel.name.value, onValueChange = { signupViewModel.name.value = it }, placeholder = "이름을 입력하세요", enabled = !isLoading && !isEmailVerified)
+        SignupTextField(label = "아이디", value = signupViewModel.publicId.value, onValueChange = { signupViewModel.publicId.value = it }, placeholder = "아이디를 입력하세요", enabled = !isLoading)
+        SignupTextField(label = "비밀번호", value = signupViewModel.password.value, onValueChange = { signupViewModel.password.value = it }, placeholder = "비밀번호를 입력하세요", isPassword = true, enabled = !isLoading)
+        SignupTextField(label = "학번", value = signupViewModel.studentId.value, onValueChange = { signupViewModel.studentId.value = it }, placeholder = "학번을 입력하세요 (예: 2411)", keyboardType = KeyboardType.Number, enabled = !isLoading)
+        SignupTextField(label = "이메일", value = signupViewModel.email.value, onValueChange = { signupViewModel.email.value = it }, placeholder = "이메일을 입력하세요", keyboardType = KeyboardType.Email, enabled = !isLoading)
 
-        EmailVerificationSection(
-            viewModel = signupViewModel,
-            isLoading = isLoading,
-            isCodeRequested = isCodeRequested,
-            isEmailVerified = isEmailVerified
-        )
+
         Spacer(Modifier.height(30.dp))
 
         Button(
@@ -107,13 +91,16 @@ fun SignupScreen(
             modifier = Modifier.fillMaxWidth().height(50.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Maincolor),
             shape = RoundedCornerShape(8.dp),
-            enabled = isFormValid && isEmailVerified && !isLoading
+            enabled = isFormValid && !isLoading
         ) {
-            Text("회원가입", fontSize = 18.sp, color = Color.White)
+            if (isLoading) {
+                CircularProgressIndicator(Modifier.size(24.dp), color = Color.White)
+            } else {
+                Text("회원가입", fontSize = 18.sp, color = Color.White)
+            }
         }
         Spacer(Modifier.height(20.dp))
 
-        // 로그인 링크
         Row {
             Text("이미 계정이 있으신가요? ", color = Color.Gray)
             ClickableText(
@@ -122,47 +109,13 @@ fun SignupScreen(
                 style = TextStyle(color = Maincolor, fontWeight = FontWeight.Bold)
             )
         }
-        Spacer(Modifier.weight(1f))
+        Spacer(Modifier.height(117.dp))
+
         Text(
             "Copyright 2023. Team 8bit All rights reserved.",
             fontSize = 12.sp, color = Color(224, 224, 224),
             modifier = Modifier.padding(bottom = 24.dp)
         )
-    }
-}
-
-@Composable
-private fun EmailVerificationSection(
-    viewModel: SignupViewModel,
-    isLoading: Boolean,
-    isCodeRequested: Boolean,
-    isEmailVerified: Boolean
-) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Box(modifier = Modifier.weight(1f)) {
-            SignupTextField(label = "이메일", value = viewModel.email.value, onValueChange = { viewModel.email.value = it }, placeholder = "이메일을 입력하세요", keyboardType = KeyboardType.Email, enabled = !isLoading && !isEmailVerified)
-        }
-        Spacer(Modifier.width(8.dp))
-        Button(
-            onClick = { viewModel.requestVerificationCode() },
-            modifier = Modifier.height(50.dp),
-            enabled = viewModel.email.value.isNotEmpty() && !isLoading && !isEmailVerified
-        ) { Text("인증요청") }
-    }
-
-    if (isCodeRequested) {
-        Spacer(Modifier.height(8.dp))
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Box(modifier = Modifier.weight(1f)) {
-                SignupTextField(label = "인증 코드", value = viewModel.verificationCode.value, onValueChange = { viewModel.verificationCode.value = it }, placeholder = "인증 코드를 입력하세요", keyboardType = KeyboardType.Number, enabled = !isLoading && !isEmailVerified)
-            }
-            Spacer(Modifier.width(8.dp))
-            Button(
-                onClick = { viewModel.verifyCode() },
-                modifier = Modifier.height(50.dp),
-                enabled = viewModel.verificationCode.value.isNotEmpty() && !isLoading && !isEmailVerified
-            ) { Text("인증확인") }
-        }
     }
 }
 

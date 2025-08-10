@@ -75,10 +75,10 @@ fun ProfileScreen(
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
             } else {
                 var profileData = ProfileResponse(
-                    name = "김민재",
-                    studentId = "2학년 4반 11번",
-                    email = "allwayshapppy@dgsw.hs.kr",
-                    room = "LAB 21, 22실"
+                    name = "박서영",
+                    studentId = "1학년 2반 2번",
+                    email = "kyukami7@dgsw.hs.kr",
+                    room = "프로젝트 5 (B1ND)"
                 )
                 if (uiState is ProfileUiState.Success) {
                     profileData = (uiState as ProfileUiState.Success).profileData
