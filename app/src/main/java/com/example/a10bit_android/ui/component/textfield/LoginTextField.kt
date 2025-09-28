@@ -1,0 +1,79 @@
+package com.example.a10bit_android.ui.component.textfield
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.a10bit_android.ui.theme.errorColor
+
+@Composable
+fun LoginTextField(
+    fieldname: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    placeholder: String,
+    isError: Boolean,   // 에러 여부
+    modifier: Modifier = Modifier,
+    textColor: Color = Color.Black,
+    placeholderColor: Color = Color.Gray,
+    errortext: String? = null,    // 기본값 = null
+    ) {
+    Column (modifier = Modifier
+        .width(318.dp)
+    ) {
+        Text(text = fieldname,
+            color = textColor,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium,
+            modifier = Modifier
+                .align(Alignment.Start)
+        )
+
+        Spacer(modifier = Modifier .height(7.dp))
+
+        OutlinedTextField(
+            value = value,
+            onValueChange = onValueChange,
+            singleLine = true,
+            shape = RoundedCornerShape(12.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                errorBorderColor = errorColor,
+                errorTextColor = errorColor
+            ),
+            placeholder = {
+                Text(
+                    text = placeholder,
+                    color = placeholderColor,
+                    fontSize = 14.sp
+                )
+            },
+            isError = isError,  // 에러 상태 반영
+            modifier = modifier
+                .fillMaxWidth()
+//                .fillMaxSize()
+//            .padding(vertical = 4.dp)
+        )
+        if (isError){
+            if (errortext != null) {
+                Text(text = errortext.toString(),
+                    color = errorColor,
+                    fontSize = 12.sp,
+                    textAlign = TextAlign.Start
+                )
+            }
+        }
+    }
+}
