@@ -6,6 +6,7 @@
     <mapping directory="$PROJECT_DIR$/10bit-server" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/To-do-list" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Todo2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/backup/devit_android" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/beep-server" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/devit_android" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/dodum-Android" vcs="Git" />
