@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -76,25 +77,28 @@ fun LoginScreen(
                 value = password,
                 onValueChange = { password = it },
                 placeholder = "비밀번호",
-                isError = isError
+                isError = isError,
+                errortext = "아이디와 비밀번호를 확인해주세요."
             )
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            if (isError) {
-                Text(
-                    text = "아이디와 비밀번호를 확인해주세요.",
-                    color = errorColor,
-                    fontSize = 16.sp
-                )
-            }
+//            if (isError) {
+//                Text(
+//                    text = "아이디와 비밀번호를 확인해주세요.",
+//                    color = errorColor,
+//                    fontSize = 16.sp
+//                )
+//            }
 
             Spacer(modifier = Modifier.height(20.dp))
 
             LoginButton(
                 "로그인",
                 onClick = {
-                    /* todo */
+                    if (username.isNotEmpty() && password.isNotEmpty()) {
+
+                    }
                 }
             )
 
@@ -109,6 +113,7 @@ fun LoginScreen(
                     Text(
                         text = "아이디 찾기",
                         fontSize = 13.sp,
+                        color = Color.Gray,
                         fontWeight = FontWeight.Medium
                     )
 
@@ -117,6 +122,7 @@ fun LoginScreen(
                     Text(
                         text = "|",
                         fontSize = 13.sp,
+                        color = Color.Gray,
                         fontWeight = FontWeight.Medium
                     )
 
@@ -125,6 +131,7 @@ fun LoginScreen(
                     Text(
                         text = "비밀번호 찾기",
                         fontSize = 13.sp,
+                        color = Color.Gray,
                         fontWeight = FontWeight.Medium
                     )
 
@@ -133,6 +140,7 @@ fun LoginScreen(
                     Text(
                         text = "|",
                         fontSize = 13.sp,
+                        color = Color.Gray,
                         fontWeight = FontWeight.Medium
                     )
 
@@ -140,6 +148,7 @@ fun LoginScreen(
 
                     Text(
                         text = "회원가입",
+                        color = Color.Gray,
                         fontSize = 13.sp,
                         fontWeight = FontWeight.Medium,
                         modifier = Modifier.clickable{
