@@ -1,7 +1,7 @@
 package com.example.a10bit_android.remote
 
 object BeepUrl {
-    const val BASE_URL = ""
+    const val BASE_URL = "https://example.com/"
 
     const val AUTH = "${BASE_URL}auth/"
     const val ATTENDANCE = "${BASE_URL}attendance/"

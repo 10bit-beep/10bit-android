@@ -23,9 +23,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.a10bit_android.ui.component.textfield.LoginTextField
-import com.example.a10bit_android.ui.theme.errorColor
 import com.example.a10bit_android.R
 import com.example.a10bit_android.ui.component.button.LoginButton
 
@@ -33,13 +33,13 @@ import com.example.a10bit_android.ui.component.button.LoginButton
 fun LoginScreen(
     navController: NavHostController
 ) {
+    val loginViewModel: LoginViewModel = hiltViewModel()
+
     Box (
         modifier = Modifier
             .fillMaxSize()
 
     ){
-
-//        Spacer(modifier = Modifier .height(153.dp))
 
         Column(
             modifier = Modifier
@@ -61,9 +61,6 @@ fun LoginScreen(
             var password by remember { mutableStateOf("") }
             var isError by remember { mutableStateOf(false) }
 
-//            Column {
-//
-//            }
             LoginTextField(
                 value = username,
                 onValueChange = { username = it },
@@ -97,7 +94,9 @@ fun LoginScreen(
                 "로그인",
                 onClick = {
                     if (username.isNotEmpty() && password.isNotEmpty()) {
-
+                        loginViewModel.login( username, password )
+                    } else {
+                        isError = true
                     }
                 }
             )
