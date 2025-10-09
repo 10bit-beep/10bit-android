@@ -59,13 +59,14 @@ fun LoginScreen(
 
             var username by remember { mutableStateOf("") }
             var password by remember { mutableStateOf("") }
-            var isError by remember { mutableStateOf(false) }
+            var isUserNameError by remember { mutableStateOf(false) }
+            var isPasswordError by remember { mutableStateOf(false) }
 
             LoginTextField(
                 value = username,
                 onValueChange = { username = it },
                 placeholder = "아이디",
-                isError = isError
+                isError = isUserNameError
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -74,7 +75,7 @@ fun LoginScreen(
                 value = password,
                 onValueChange = { password = it },
                 placeholder = "비밀번호",
-                isError = isError,
+                isError = isPasswordError,
                 errortext = "아이디와 비밀번호를 확인해주세요."
             )
 
@@ -95,8 +96,10 @@ fun LoginScreen(
                 onClick = {
                     if (username.isNotEmpty() && password.isNotEmpty()) {
                         loginViewModel.login( username, password )
-                    } else {
-                        isError = true
+                    } else if (username.isEmpty()) {
+                        isUserNameError = true
+                    } else if (password.isEmpty()) {
+                        isPasswordError = true
                     }
                 }
             )
