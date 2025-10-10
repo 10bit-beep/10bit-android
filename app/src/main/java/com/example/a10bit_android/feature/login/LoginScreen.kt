@@ -28,6 +28,9 @@ import androidx.navigation.NavHostController
 import com.example.a10bit_android.ui.component.textfield.LoginTextField
 import com.example.a10bit_android.R
 import com.example.a10bit_android.ui.component.button.LoginButton
+import com.example.a10bit_android.ui.component.textfield.LoginErrorType
+
+
 
 @Composable
 fun LoginScreen(
@@ -59,14 +62,15 @@ fun LoginScreen(
 
             var username by remember { mutableStateOf("") }
             var password by remember { mutableStateOf("") }
-            var isUserNameError by remember { mutableStateOf(false) }
-            var isPasswordError by remember { mutableStateOf(false) }
+            var usernameErrorType by remember { mutableStateOf(LoginErrorType.NONE) }
+            var passwordErrorType by remember { mutableStateOf(LoginErrorType.NONE) }
+
 
             LoginTextField(
                 value = username,
                 onValueChange = { username = it },
                 placeholder = "아이디",
-                isError = isUserNameError
+                errorType = usernameErrorType
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -75,8 +79,7 @@ fun LoginScreen(
                 value = password,
                 onValueChange = { password = it },
                 placeholder = "비밀번호",
-                isError = isPasswordError,
-                errortext = "아이디와 비밀번호를 확인해주세요."
+                errorType = passwordErrorType
             )
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -94,12 +97,22 @@ fun LoginScreen(
             LoginButton(
                 "로그인",
                 onClick = {
-                    if (username.isNotEmpty() && password.isNotEmpty()) {
-                        loginViewModel.login( username, password )
-                    } else if (username.isEmpty()) {
-                        isUserNameError = true
-                    } else if (password.isEmpty()) {
-                        isPasswordError = true
+                    usernameErrorType = when {
+                        username.isEmpty() -> LoginErrorType.EMPTY
+                        else -> LoginErrorType.NONE
+                    }
+                    passwordErrorType = when {
+                        password.isEmpty() -> LoginErrorType.EMPTY
+                        else -> LoginErrorType.NONE
+                    }
+                    if (usernameErrorType == LoginErrorType.NONE && passwordErrorType == LoginErrorType.NONE) {
+                        loginViewModel.login(username, password)
+                        if ( loginViewModel.loginSuccess.value == true ) {
+                            navController.navigate("home")
+                        } else {
+//                            usernameErrorType = LoginErrorType.MISMATCH
+                            passwordErrorType = LoginErrorType.MISMATCH
+                        }
                     }
                 }
             )
@@ -107,9 +120,8 @@ fun LoginScreen(
             Spacer(modifier = Modifier .height(19.dp))
 
 
-            Box ( ){
+            Box {
                 Row ( modifier = Modifier
-//                    .fillMaxSize()
                     .align(Alignment.Center)
                 ){
                     Text(

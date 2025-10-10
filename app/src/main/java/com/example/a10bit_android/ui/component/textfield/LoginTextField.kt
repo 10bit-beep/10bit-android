@@ -19,12 +19,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.a10bit_android.ui.theme.errorColor
 
+enum class LoginErrorType(val message: String) {
+    NONE(""),
+    EMPTY("값을 입력해주세요."),
+    MISMATCH("아이디와 비밀번호를 확인해주세요.")
+}
+
 @Composable
 fun LoginTextField(
     value: String,
     onValueChange: (String) -> Unit,
     placeholder: String,
-    isError: Boolean,   // 에러 여부
+    errorType: LoginErrorType = LoginErrorType.NONE,
     modifier: Modifier = Modifier,
     textColor: Color = Color.Black,
     placeholderColor: Color = Color.Gray,
@@ -41,7 +47,7 @@ fun LoginTextField(
 //                .align(Alignment.Start)
 //        )
 
-        Spacer(modifier = Modifier .height(7.dp))
+        Spacer(modifier = Modifier.height(7.dp))
 
         OutlinedTextField(
             value = value,
@@ -59,20 +65,19 @@ fun LoginTextField(
                     fontSize = 12.sp
                 )
             },
-            isError = isError,  // 에러 상태 반영
-            modifier = modifier
-                .fillMaxWidth()
-//                .fillMaxSize()
-//            .padding(vertical = 4.dp)
+            isError = errorType != LoginErrorType.NONE,
+            modifier = modifier .fillMaxWidth()
         )
-        if (isError){
-            if (errortext != null) {
-                Text(text = errortext.toString(),
-                    color = errorColor,
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Start
-                )
-            }
+        if (errorType != LoginErrorType.NONE) {
+//            Spacer(modifier = Modifier.height(20.dp))
+//            Spacer(modifier = Modifier.height(2.dp))
+
+            Text(
+                text = errorType.message,
+                color = errorColor,
+                fontSize = 14.sp,
+                textAlign = TextAlign.Start
+            )
         }
     }
 }
