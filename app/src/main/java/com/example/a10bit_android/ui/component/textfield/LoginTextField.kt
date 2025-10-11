@@ -10,10 +10,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,22 +29,11 @@ fun LoginTextField(
     onValueChange: (String) -> Unit,
     placeholder: String,
     errorType: LoginErrorType = LoginErrorType.NONE,
-    modifier: Modifier = Modifier,
-    textColor: Color = Color.Black,
     placeholderColor: Color = Color.Gray,
-    errortext: String? = null,    // 기본값 = null
     ) {
     Column (modifier = Modifier
         .width(314.dp)
     ) {
-//        Text(text = fieldname,
-//            color = textColor,
-//            fontSize = 18.sp,
-//            fontWeight = FontWeight.Medium,
-//            modifier = Modifier
-//                .align(Alignment.Start)
-//        )
-
         Spacer(modifier = Modifier.height(7.dp))
 
         OutlinedTextField(
@@ -66,7 +53,7 @@ fun LoginTextField(
                 )
             },
             isError = errorType != LoginErrorType.NONE,
-            modifier = modifier .fillMaxWidth()
+            modifier = Modifier .fillMaxWidth()
         )
         if (errorType != LoginErrorType.NONE) {
 //            Spacer(modifier = Modifier.height(20.dp))

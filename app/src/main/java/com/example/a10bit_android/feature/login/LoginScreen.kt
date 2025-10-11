@@ -110,7 +110,6 @@ fun LoginScreen(
                         if ( loginViewModel.loginSuccess.value == true ) {
                             navController.navigate("home")
                         } else {
-//                            usernameErrorType = LoginErrorType.MISMATCH
                             passwordErrorType = LoginErrorType.MISMATCH
                         }
                     }
