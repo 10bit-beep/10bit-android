@@ -29,7 +29,7 @@ import com.example.a10bit_android.ui.component.textfield.LoginTextField
 import com.example.a10bit_android.R
 import com.example.a10bit_android.ui.component.button.LoginButton
 import com.example.a10bit_android.ui.component.textfield.LoginErrorType
-
+import com.example.a10bit_android.ui.theme.FooterTextColor
 
 
 @Composable
@@ -174,8 +174,12 @@ fun LoginScreen(
 
         Box (modifier = Modifier
             .align(Alignment.BottomCenter)
-            .padding(47.dp)) {
-
+            .padding(bottom = 47.dp)) {
+            Text(text = "Copyright 2023. Team 8bit All rights reserved.",
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Normal,
+                color = FooterTextColor
+            )
         }
     }
 
