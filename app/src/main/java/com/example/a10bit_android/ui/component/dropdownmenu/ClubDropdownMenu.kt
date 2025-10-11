@@ -32,23 +32,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.style.TextAlign
 import com.example.a10bit_android.ui.theme.errorColor
 
+val selectclubs = mapOf(
+    "랩 21, 22실 (ALT)" to "LAB21_22",
+    "랩 19, 20실 (B1ND)" to "LAB19_20",
+    "프로젝트 6실 (3D)" to "PROJECT6",
+    "프로젝트 4실 (Louter)" to "PROJECT4",
+    "랩 17, 18실 (CNS)" to "LAB17_18",
+    "프로젝트 5실 (MODI)" to "PROJECT5",
+    "랩 6, 7실 (DUCAMI)" to "LAB6_7",
+    "랩 10, 11실 (Chatty)" to "LAB10_11"
+)
+
 @Composable
 fun ClubSelector(
     selectedClub: String,
     onClubSelected: (String) -> Unit,
-    onclick: () -> Unit,
     isError: Boolean = false
 ) {
-    val clubs = mapOf(
-        "랩 21, 22실 (ALT)" to "LAB21_22",
-        "랩 19, 20실 (B1ND)" to "LAB19_20",
-        "프로젝트 6실 (3D)" to "PROJECT6",
-        "프로젝트 4실 (Louter)" to "PROJECT4",
-        "랩 17, 18실 (CNS)" to "LAB17_18",
-        "프로젝트 5실 (MODI)" to "PROJECT5",
-        "랩 6, 7실 (DUCAMI)" to "LAB6_7",
-        "랩 10, 11실 (Chatty)" to "LAB10_11"
-    )
 
     var expanded by remember { mutableStateOf(false) }
 
@@ -91,7 +91,7 @@ fun ClubSelector(
                     )
                 },
                 trailingIcon = {
-                    IconButton(onClick = { expanded != expanded }) {
+                    IconButton(onClick = { expanded = !expanded }) {
                         Icon(
                             imageVector = if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                             contentDescription = "null"
@@ -101,7 +101,7 @@ fun ClubSelector(
                 modifier = Modifier
                     .width(323.dp)
                     .height(52.dp)
-                    .clickable { expanded = true }
+                    .clickable { expanded = !expanded }
             )
 
             DropdownMenu(
@@ -110,7 +110,7 @@ fun ClubSelector(
                 modifier = Modifier
                     .width(323.dp)
             ) {
-                clubs.forEach { club ->
+                selectclubs.forEach { club ->
                     DropdownMenuItem(
                         text = {
                             Text(
@@ -119,20 +119,22 @@ fun ClubSelector(
                                 fontWeight = FontWeight.Medium
                             )
                         },
-                        onClick = { onclick
-//                            onClubSelected(club.value)
-//                            expanded = false
+                        onClick = {
+                            onClubSelected(club.key)
+                            expanded = false
                         }
-                    )
-                }
-                if (isError){
-                    Text(text = "동아리를 선택해주세요.",
-                        color = errorColor,
-                        fontSize = 12.sp,
-                        textAlign = TextAlign.Start
                     )
                 }
             }
         }
+
+        if (isError){
+            Text(text = "동아리를 선택해주세요.",
+                color = errorColor,
+                fontSize = 14.sp,
+                textAlign = TextAlign.Start
+            )
+        }
+
     }
 }

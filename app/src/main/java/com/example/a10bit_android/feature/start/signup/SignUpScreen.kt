@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.a10bit_android.R
 import com.example.a10bit_android.ui.component.button.SignUpButton
+import com.example.a10bit_android.ui.component.dropdownmenu.ClubSelector
+import com.example.a10bit_android.ui.component.dropdownmenu.selectclubs
 import com.example.a10bit_android.ui.component.textfield.SignUpErrorType
 import com.example.a10bit_android.ui.component.textfield.SignUpTextField
 import com.example.a10bit_android.ui.theme.AuthBackground
@@ -116,47 +118,57 @@ fun SignUpScreen (
                 errorType = emailErrorType,
             )
 
+            Spacer(modifier = Modifier .height(20.dp))
+
+            var selectedClub by remember { mutableStateOf("") }
+            var clubError by remember { mutableStateOf(false) }
+
+            ClubSelector(
+                selectedClub = selectedClub,
+                onClubSelected = { club ->
+                    selectedClub = club
+                    clubError = false
+                },
+                isError = clubError
+            )
+
             Spacer(modifier = Modifier.height(33.dp))
 
             SignUpButton(
                 buttonname = "회원가입",
                 onclick = {
-                    // 아이디, 비밀번호 공백인지 검사
                     usernameErrorType =
                         if (username.isEmpty()) SignUpErrorType.EMPTY else SignUpErrorType.NONE
                     passwordErrorType =
                         if (password.isEmpty()) SignUpErrorType.EMPTY else SignUpErrorType.NONE
-
-                    // 학번 4자리 숫자인지 검사
                     studentIdErrorType = when {
                         studentId.isEmpty() -> SignUpErrorType.EMPTY
                         !studentId.matches(Regex("\\d{4}")) -> SignUpErrorType.INVALID
                         else -> SignUpErrorType.NONE
                     }
-
-                    // 이메일 형식 검사
                     emailErrorType = when {
                         email.isEmpty() -> SignUpErrorType.EMPTY
-                        !android.util.Patterns.EMAIL_ADDRESS.matcher(email)
-                            .matches() -> SignUpErrorType.INVALID
-
+                        !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> SignUpErrorType.INVALID
                         else -> SignUpErrorType.NONE
                     }
+
+                    // 드롭다운 체크
+                    clubError = selectedClub.isEmpty()
 
                     // 회원가입 처리
                     if (usernameErrorType == SignUpErrorType.NONE &&
                         passwordErrorType == SignUpErrorType.NONE &&
                         studentIdErrorType == SignUpErrorType.NONE &&
-                        emailErrorType == SignUpErrorType.NONE
+                        emailErrorType == SignUpErrorType.NONE &&
+                        !clubError
                     ) {
-                        // TODO: 실제 회원가입 API 호출
-                        val isSignUpSuccess = true // 예시, 실제로는 ViewModel 호출
+                        var clubValue = selectclubs[selectedClub]
+
+                        val isSignUpSuccess = true //나중에 교체해야함!!!!!!!!!!!!!!
 
                         if (isSignUpSuccess) {
-                            // 회원가입 성공시 화면 이동
-                            navController.navigate("home")
+                            navController.navigate("login")
                         } else {
-                            // 회원가입 실패시 에러 표시
                             usernameErrorType = SignUpErrorType.MISMATCH_COLOR
                             passwordErrorType = SignUpErrorType.MISMATCH_COLOR
                             studentIdErrorType = SignUpErrorType.MISMATCH_COLOR
@@ -172,13 +184,13 @@ fun SignUpScreen (
                 .align(Alignment.CenterHorizontally)
             ){
                 Text(text = "이미 계정이 있으신가요?",
-                    color = Color.LightGray,
+                    color = Color.Gray,
                     fontWeight = FontWeight.Normal)
 
                 Spacer(modifier = Modifier .width(20.dp))
 
                 Text(text = "로그인",
-                    color = Color.LightGray,
+                    color = Color.Gray,
                     fontWeight = FontWeight.Medium,
                     modifier = Modifier.clickable{
                         navController.navigate("login")
