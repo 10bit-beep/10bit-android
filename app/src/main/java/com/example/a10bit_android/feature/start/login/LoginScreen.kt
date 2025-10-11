@@ -29,6 +29,7 @@ import com.example.a10bit_android.ui.component.textfield.LoginTextField
 import com.example.a10bit_android.R
 import com.example.a10bit_android.ui.component.button.LoginButton
 import com.example.a10bit_android.ui.component.textfield.LoginErrorType
+import com.example.a10bit_android.ui.component.textfield.LoginPwTextField
 import com.example.a10bit_android.ui.theme.FooterTextColor
 
 
@@ -74,7 +75,7 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            LoginTextField(
+            LoginPwTextField(
                 value = password,
                 onValueChange = { password = it },
                 placeholder = "비밀번호",
