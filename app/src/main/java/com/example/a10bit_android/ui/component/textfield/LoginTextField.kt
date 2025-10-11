@@ -20,7 +20,8 @@ import com.example.a10bit_android.ui.theme.errorColor
 enum class LoginErrorType(val message: String) {
     NONE(""),
     EMPTY("값을 입력해주세요."),
-    MISMATCH("아이디와 비밀번호를 확인해주세요.")
+    MISMATCH_TEXT("아이디와 비밀번호를 확인해주세요."),
+    MISMATCH_COLOR("")
 }
 
 @Composable
@@ -55,10 +56,9 @@ fun LoginTextField(
             isError = errorType != LoginErrorType.NONE,
             modifier = Modifier .fillMaxWidth()
         )
-        if (errorType != LoginErrorType.NONE) {
+        if (errorType != LoginErrorType.NONE && errorType != LoginErrorType.MISMATCH_COLOR) {
 //            Spacer(modifier = Modifier.height(20.dp))
 //            Spacer(modifier = Modifier.height(2.dp))
-
             Text(
                 text = errorType.message,
                 color = errorColor,

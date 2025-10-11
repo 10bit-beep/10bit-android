@@ -1,4 +1,4 @@
-package com.example.a10bit_android.feature.login
+package com.example.a10bit_android.feature.start.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -65,7 +65,6 @@ fun LoginScreen(
             var usernameErrorType by remember { mutableStateOf(LoginErrorType.NONE) }
             var passwordErrorType by remember { mutableStateOf(LoginErrorType.NONE) }
 
-
             LoginTextField(
                 value = username,
                 onValueChange = { username = it },
@@ -110,7 +109,8 @@ fun LoginScreen(
                         if ( loginViewModel.loginSuccess.value == true ) {
                             navController.navigate("home")
                         } else {
-                            passwordErrorType = LoginErrorType.MISMATCH
+                            usernameErrorType = LoginErrorType.MISMATCH_COLOR
+                            passwordErrorType = LoginErrorType.MISMATCH_TEXT
                         }
                     }
                 }

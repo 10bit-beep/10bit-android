@@ -1,4 +1,4 @@
-package com.example.a10bit_android.feature.splash
+package com.example.a10bit_android.feature.start.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

@@ -1,4 +1,4 @@
-package com.example.a10bit_android.feature.login
+package com.example.a10bit_android.feature.start.login
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

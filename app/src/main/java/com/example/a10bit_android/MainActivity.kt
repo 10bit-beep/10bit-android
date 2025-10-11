@@ -10,8 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.example.a10bit_android.feature.splash.SplashScreen
-import com.example.a10bit_android.feature.login.LoginScreen
+import com.example.a10bit_android.feature.start.splash.SplashScreen
+import com.example.a10bit_android.feature.start.login.LoginScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
