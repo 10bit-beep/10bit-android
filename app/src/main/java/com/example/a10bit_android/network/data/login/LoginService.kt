@@ -9,6 +9,6 @@ interface LoginService {
     @Headers("userAgent: Android-123")
     @POST(BeepUrl.Auth.login)
     suspend fun login(
-        @Body request: LoginRequest
+        @Body request: LoginReQuest
     ): LoginResponse
 }
