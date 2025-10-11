@@ -22,7 +22,9 @@ import com.example.a10bit_android.ui.theme.errorColor
 enum class SignUpErrorType(val message: String) {
     NONE(""),
     EMPTY("값을 입력해주세요."),
-    MISMATCH_TEXT("올바른 형식이 아닙니다.")
+    INVALID("올바른 형식이 아닙니다."),
+    MISMATCH_COLOR(""),
+    MISMATCH_TEXT("이미 존재하는 계정이거나 잘못된 입력이 있습니다.")
 }
 
 @Composable
@@ -36,7 +38,7 @@ fun SignUpTextField(
 ) {
     Column {
         Row (modifier = Modifier
-            .align(Alignment.CenterHorizontally)
+            .align(Alignment.Start)
         ){
             Spacer(modifier = Modifier .width(14.dp))
 
@@ -72,7 +74,7 @@ fun SignUpTextField(
                 .width(323.dp)
                 .height(52.dp)
         )
-        if (errorType != SignUpErrorType.NONE) {
+        if (errorType != SignUpErrorType.NONE && errorType != SignUpErrorType.MISMATCH_COLOR) {
             Text(
                 text = errorType.message,
                 color = errorColor,

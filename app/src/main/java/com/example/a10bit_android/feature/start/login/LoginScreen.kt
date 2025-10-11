@@ -71,7 +71,10 @@ fun LoginScreen(
 
             LoginTextField(
                 value = username,
-                onValueChange = { username = it },
+                onValueChange = {
+                    username = it
+                    if (usernameErrorType != LoginErrorType.NONE) usernameErrorType = LoginErrorType.NONE
+                },
                 placeholder = "아이디",
                 errorType = usernameErrorType
             )
@@ -80,7 +83,10 @@ fun LoginScreen(
 
             LoginPwTextField(
                 value = password,
-                onValueChange = { password = it },
+                onValueChange = {
+                    password = it
+                    if (passwordErrorType != LoginErrorType.NONE) passwordErrorType = LoginErrorType.NONE
+                },
                 placeholder = "비밀번호",
                 errorType = passwordErrorType
             )
