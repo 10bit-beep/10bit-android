@@ -24,8 +24,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.a10bit_android.R
+import com.example.a10bit_android.feature.start.login.LoginViewModel
 import com.example.a10bit_android.ui.component.button.SignUpButton
 import com.example.a10bit_android.ui.component.dropdownmenu.ClubSelector
 import com.example.a10bit_android.ui.component.dropdownmenu.selectclubs
@@ -38,6 +40,8 @@ import com.example.a10bit_android.ui.theme.FooterTextColor
 fun SignUpScreen (
     navController: NavHostController
 ) {
+    val signupViewModel: SignUpViewModel = hiltViewModel()
+
     Box(modifier = Modifier
         .fillMaxSize()
         .background(AuthBackground)
@@ -164,9 +168,15 @@ fun SignUpScreen (
                     ) {
                         var clubValue = selectclubs[selectedClub]
 
-                        val isSignUpSuccess = true //나중에 교체해야함!!!!!!!!!!!!!!
+                        signupViewModel.signup(
+                            studentNumber = studentId.toInt(),
+                            publicId = username,
+                            password = password,
+                            email = email,
+                            club = clubValue.toString()
+                        )
 
-                        if (isSignUpSuccess) {
+                        if (signupViewModel.signupSuccess.value == true) {
                             navController.navigate("login")
                         } else {
                             usernameErrorType = SignUpErrorType.MISMATCH_COLOR

@@ -1,6 +1,7 @@
 package com.example.a10bit_android.network.data
 
 import com.example.a10bit_android.network.data.login.LoginService
+import com.example.a10bit_android.network.data.signup.SignUpService
 import com.example.a10bit_android.remote.BeepUrl
 import dagger.Module
 import dagger.Provides
@@ -27,5 +28,11 @@ object NetworkModule {
     @Singleton
     fun provideLoginService(retrofit: Retrofit): LoginService {
         return retrofit.create(LoginService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSignUpService(retrofit: Retrofit): SignUpService {
+        return retrofit.create(SignUpService::class.java)
     }
 }
