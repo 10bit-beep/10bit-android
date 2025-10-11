@@ -15,3 +15,4 @@ val errorColor = Color(rgb(255,62,62))
 val mainColor = Color(rgb(94, 152, 147))
 
 val FooterTextColor = Color(rgb(224,224,224))
+val AuthBackground = Color(rgb(251,253,255))

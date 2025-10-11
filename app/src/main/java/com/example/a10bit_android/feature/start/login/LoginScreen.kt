@@ -1,6 +1,7 @@
 package com.example.a10bit_android.feature.start.login
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,6 +31,7 @@ import com.example.a10bit_android.R
 import com.example.a10bit_android.ui.component.button.LoginButton
 import com.example.a10bit_android.ui.component.textfield.LoginErrorType
 import com.example.a10bit_android.ui.component.textfield.LoginPwTextField
+import com.example.a10bit_android.ui.theme.AuthBackground
 import com.example.a10bit_android.ui.theme.FooterTextColor
 
 
@@ -42,6 +44,7 @@ fun LoginScreen(
     Box (
         modifier = Modifier
             .fillMaxSize()
+            .background(AuthBackground)
 
     ){
 

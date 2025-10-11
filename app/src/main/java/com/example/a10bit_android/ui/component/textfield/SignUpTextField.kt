@@ -1,48 +1,58 @@
 package com.example.a10bit_android.ui.component.textfield
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.a10bit_android.ui.theme.errorColor
 
-enum class LoginErrorType(val message: String) {
+enum class SignUpErrorType(val message: String) {
     NONE(""),
     EMPTY("값을 입력해주세요."),
-    MISMATCH_TEXT("아이디와 비밀번호를 확인해주세요."),
-    MISMATCH_COLOR("")
+    MISMATCH_TEXT("올바른 형식이 아닙니다.")
 }
 
 @Composable
-fun LoginTextField(
+fun SignUpTextField(
+    title: String,
     value: String,
     onValueChange: (String) -> Unit,
     placeholder: String,
-    errorType: LoginErrorType = LoginErrorType.NONE,
+    errorType: SignUpErrorType = SignUpErrorType.NONE,
     placeholderColor: Color = Color.Gray,
-    ) {
-    Column (modifier = Modifier
-        .width(314.dp)
-    ) {
-        Spacer(modifier = Modifier.height(7.dp))
+) {
+    Column {
+        Row (modifier = Modifier
+            .align(Alignment.CenterHorizontally)
+        ){
+            Spacer(modifier = Modifier .width(14.dp))
+
+            Text(text = title,
+                color = Color.Black,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold)
+        }
+
+        Spacer(modifier = Modifier .height(2.dp))
 
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
             singleLine = true,
-            shape = RoundedCornerShape(8.dp),
+            shape = RoundedCornerShape(17.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 errorBorderColor = errorColor,
                 errorTextColor = errorColor,
@@ -53,15 +63,16 @@ fun LoginTextField(
                 Text(
                     text = placeholder,
                     color = placeholderColor,
-                    fontSize = 12.sp
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Medium
                 )
             },
-            isError = errorType != LoginErrorType.NONE,
-            modifier = Modifier .fillMaxWidth()
+            isError = errorType != SignUpErrorType.NONE,
+            modifier = Modifier
+                .width(323.dp)
+                .height(52.dp)
         )
-        if (errorType != LoginErrorType.NONE && errorType != LoginErrorType.MISMATCH_COLOR) {
-//            Spacer(modifier = Modifier.height(20.dp))
-//            Spacer(modifier = Modifier.height(2.dp))
+        if (errorType != SignUpErrorType.NONE) {
             Text(
                 text = errorType.message,
                 color = errorColor,

@@ -50,7 +50,9 @@ fun LoginPwTextField(
             shape = RoundedCornerShape(8.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 errorBorderColor = errorColor,
-                errorTextColor = errorColor
+                errorTextColor = errorColor,
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White
             ),
             placeholder = {
                 Text(
