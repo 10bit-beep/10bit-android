@@ -96,7 +96,9 @@ fun AttendanceScreen (
                 AttendanceButton(
                     buttonname = "출석하기",
                     buttonColor = mainColor,
-                    onclick = { /*TODO*/ }
+                    onclick = {
+
+                    }
                 )
             }
 
