@@ -10,6 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
+import com.example.a10bit_android.feature.attendance.AttendanceScreen
 import com.example.a10bit_android.feature.start.splash.SplashScreen
 import com.example.a10bit_android.feature.start.login.LoginScreen
 import com.example.a10bit_android.feature.start.signup.SignUpScreen
@@ -46,6 +48,14 @@ fun MyAppNavHost(
             }
             composable("signup") {
                 SignUpScreen(navController)
+            }
+        }
+        navigation(
+         startDestination = "attendance",
+            route = "main_graph"
+        ) {
+            composable("attendance") {
+                AttendanceScreen(navController)
             }
         }
     }

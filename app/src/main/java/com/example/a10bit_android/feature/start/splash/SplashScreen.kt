@@ -21,7 +21,9 @@ import androidx.navigation.NavHostController
 fun SplashScreen(navController: NavHostController) {
     LaunchedEffect(Unit) {
         delay(3000)
-        navController.navigate("login") {
+//        navController.navigate("login")
+        navController.navigate("main_graph") //test
+        {
             popUpTo("splash") { inclusive = true }
         }
     }

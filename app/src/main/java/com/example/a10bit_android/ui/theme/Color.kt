@@ -16,3 +16,4 @@ val mainColor = Color(rgb(94, 152, 147))
 
 val FooterTextColor = Color(rgb(224,224,224))
 val AuthBackground = Color(rgb(251,253,255))
+val HomeBackground = Color(rgb(238,240,244))

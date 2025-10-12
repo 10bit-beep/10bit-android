@@ -17,8 +17,8 @@ object BeepUrl {
         const val check = "${ATTENDANCE}check"
     }
 
-    object Classroom {
-        const val lookup = "${CLASSROOM}lookup"
-    }
+//    object Classroom {
+//        const val lookup = "${CLASSROOM}lookup"
+//    }
 
 }
