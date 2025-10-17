@@ -1,9 +1,9 @@
-package com.example.a10bit_android.network.data
+package com.example.a10bit_android.network.start
 
 import com.example.a10bit_android.network.atendance.AttendanceCheckService
 import com.example.a10bit_android.network.atendance.AttendanceResetService
-import com.example.a10bit_android.network.data.login.LoginService
-import com.example.a10bit_android.network.data.signup.SignUpService
+import com.example.a10bit_android.network.start.login.LoginService
+import com.example.a10bit_android.network.start.signup.SignUpService
 import com.example.a10bit_android.remote.BeepUrl
 import dagger.Module
 import dagger.Provides

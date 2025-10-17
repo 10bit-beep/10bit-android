@@ -7,6 +7,6 @@ import retrofit2.http.POST
 interface AttendanceCheckService {
     @POST(BeepUrl.Attendance.check)
     suspend fun attendanceCheck(
-        @Body request: AttendanceReQuest
-    ): AttendanceResponse
+        @Body request: AttendanceCheckReQuest
+    ): String
 }

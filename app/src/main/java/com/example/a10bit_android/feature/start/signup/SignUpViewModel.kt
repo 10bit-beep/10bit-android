@@ -3,9 +3,9 @@ package com.example.a10bit_android.feature.start.signup
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.a10bit_android.network.data.signup.SignUpReQuest
-import com.example.a10bit_android.network.data.signup.SignUpResponse
-import com.example.a10bit_android.network.data.signup.SignUpService
+import com.example.a10bit_android.network.start.signup.SignUpReQuest
+import com.example.a10bit_android.network.start.signup.SignUpResponse
+import com.example.a10bit_android.network.start.signup.SignUpService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

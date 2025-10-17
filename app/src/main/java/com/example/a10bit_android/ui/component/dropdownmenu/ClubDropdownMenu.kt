@@ -33,14 +33,14 @@ import androidx.compose.ui.text.style.TextAlign
 import com.example.a10bit_android.ui.theme.errorColor
 
 val selectclubs = mapOf(
-    "랩 21, 22실 (ALT)" to "LAB21_22",
-    "랩 19, 20실 (B1ND)" to "LAB19_20",
-    "프로젝트 6실 (3D)" to "PROJECT6",
-    "프로젝트 4실 (Louter)" to "PROJECT4",
-    "랩 17, 18실 (CNS)" to "LAB17_18",
-    "프로젝트 5실 (MODI)" to "PROJECT5",
-    "랩 6, 7실 (DUCAMI)" to "LAB6_7",
-    "랩 10, 11실 (Chatty)" to "LAB10_11"
+    "랩 21, 22실 (ALT)" to "LAB 21_22",
+    "랩 19, 20실 (B1ND)" to "LAB 19_20",
+    "프로젝트 6실 (3D)" to "PROJECT 6",
+    "프로젝트 4실 (Louter)" to "PROJECT 4",
+    "랩 17, 18실 (CNS)" to "LAB 17_18",
+    "프로젝트 5실 (MODI)" to "PROJECT 5",
+    "랩 6, 7실 (DUCAMI)" to "LAB 6_7",
+    "랩 10, 11실 (Chatty)" to "LAB 10_11"
 )
 
 @Composable

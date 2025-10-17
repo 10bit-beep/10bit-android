@@ -4,19 +4,22 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.a10bit_android.network.data.login.LoginReQuest
-import com.example.a10bit_android.network.data.login.LoginResponse
+import com.example.a10bit_android.data.UserRepository
+import com.example.a10bit_android.network.start.login.LoginReQuest
+import com.example.a10bit_android.network.start.login.LoginResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
-import com.example.a10bit_android.network.data.login.LoginService
+import com.example.a10bit_android.network.start.login.LoginService
 
 
 @HiltViewModel
-class LoginViewModel @Inject constructor
-    (private val loginService: LoginService) : ViewModel() {
+class LoginViewModel @Inject constructor (
+    private val loginService: LoginService,
+    private val userRepository: UserRepository
+            ) : ViewModel() {
 
     private val _loginSuccess = mutableStateOf<Boolean?>(null)
     val loginSuccess: State<Boolean?> = _loginSuccess
@@ -35,7 +38,12 @@ class LoginViewModel @Inject constructor
                     // 로그인 성공
                     println("로그인 성공: 토큰 -> ${response.token}")
                     _loginSuccess.value = true
-                    // token 저장 로직 추가
+
+                    userRepository.saveUserData(
+                        publicId = username,
+                        token = response.token,
+                        isChecked = false
+                    )
                 } else {
                     // 로그인 실패
                     println("로그인 실패: success = ${response.success}")

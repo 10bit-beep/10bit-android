@@ -60,7 +60,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation(libs.androidx.navigation.compose) //네비바
+    implementation(libs.androidx.navigation.compose) //네비
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
@@ -69,4 +69,10 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(libs.androidx.material.icons.extended)
+
+    implementation (libs.androidx.datastore.preferences)
+
+    implementation (libs.kotlinx.coroutines.core)
+    implementation (libs.kotlinx.coroutines.android)
+
 }

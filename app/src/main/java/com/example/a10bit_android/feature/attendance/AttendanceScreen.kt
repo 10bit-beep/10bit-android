@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.a10bit_android.ui.theme.HomeBackground
 import com.example.a10bit_android.R
@@ -31,6 +32,8 @@ import com.example.a10bit_android.ui.theme.mainColor
 fun AttendanceScreen (
     navController: NavHostController
 ) {
+    val viewModel: AttendanceViewModel = hiltViewModel()
+
     Box(modifier = Modifier
         .fillMaxSize()
         .background(HomeBackground)
@@ -97,11 +100,10 @@ fun AttendanceScreen (
                     buttonname = "출석하기",
                     buttonColor = mainColor,
                     onclick = {
-
+                        viewModel.startAttendance()
                     }
                 )
             }
-
         }
     }
 }

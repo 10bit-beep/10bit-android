@@ -6,7 +6,9 @@ import android.content.Intent
 import android.nfc.NfcAdapter
 import android.nfc.Tag
 
-class NfcHandler(private val activity: Activity, private val onTagRead: (String) -> Unit) {
+class NfcHandler(
+    private val activity: Activity,
+    private val onTagRead: (String) -> Unit) {
 
     private val nfcAdapter: NfcAdapter? = NfcAdapter.getDefaultAdapter(activity)
 
@@ -24,7 +26,13 @@ class NfcHandler(private val activity: Activity, private val onTagRead: (String)
     }
 
     fun handleIntent(intent: Intent) {
-        val tag = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
+        val tag: Tag? = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(NfcAdapter.EXTRA_TAG, Tag::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
+        }
+
         tag?.let {
             val tagId = it.id.joinToString("") { byte -> "%02X".format(byte) }
             onTagRead(tagId)
