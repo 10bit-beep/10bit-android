@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.a10bit_android.data.UserPrefsKeys.IS_CHECKED
 import com.example.a10bit_android.data.UserPrefsKeys.TOKEN
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -18,7 +19,7 @@ private val PUBLIC_ID = stringPreferencesKey("public_id")
 
 @Singleton
 class UserRepository @Inject constructor(
-    private val context: Context
+    @ApplicationContext private val context: Context
 ) {
     // PUBLIC_ID를 Flow로 : 비동기 데이터의 변화를 실시간으로 관찰할 수 있게 하기 위함
     val publicIdFlow: Flow<String?> = context.dataStore.data

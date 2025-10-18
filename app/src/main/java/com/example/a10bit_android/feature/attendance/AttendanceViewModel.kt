@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.a10bit_android.data.UserRepository // Repository import
 import com.example.a10bit_android.network.atendance.AttendanceCheckService
 import com.example.a10bit_android.network.atendance.AttendanceCheckReQuest
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -22,8 +23,8 @@ class AttendanceViewModel @Inject constructor(
     private val _tagId = MutableLiveData<String>()
     val tagId: LiveData<String> get() = _tagId
 
-    private val _attendanceStatus = MutableLiveData<String>()
-    val attendanceStatus: LiveData<String> get() = _attendanceStatus
+    private val _attendanceStatus = MutableStateFlow("")
+    val attendanceStatus: StateFlow<String> get() = _attendanceStatus
 
     // PUBLIC_ID를 Repository에서 Flow로 가져와 StateFlow로 변환
     // StateFlow는 UI가 관찰하기 쉬운 형태로, 데이터 변화를 실시간으로 반영ㄱㄴ

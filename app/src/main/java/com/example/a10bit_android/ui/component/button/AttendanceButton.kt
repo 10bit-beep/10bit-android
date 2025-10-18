@@ -18,7 +18,8 @@ import androidx.compose.ui.unit.sp
 fun AttendanceButton (
     buttonname: String,
     buttonColor: Color,
-    onclick: () -> Unit
+    onclick: () -> Unit,
+    ischecked: Boolean
 ) {
     Button(
         onClick = onclick,

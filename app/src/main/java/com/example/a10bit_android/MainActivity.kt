@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.activity.viewModels
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.observe
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -47,16 +48,16 @@ class MainActivity : ComponentActivity() {
 //        observeViewModel()
     }
 
-    private fun observeViewModel() {
-        viewModel.isNfcActive.observe(this) { active ->
-            if (active) nfcHandler.enable()
-            else nfcHandler.disable()
-        }
-
-        viewModel.attendanceStatus.observe(this) { msg ->
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-        }
-    }
+//    private fun observeViewModel() {
+//        viewModel.isNfcActive.observe(this) { active ->
+//            if (active) nfcHandler.enable()
+//            else nfcHandler.disable()
+//        }
+//
+//        viewModel.attendanceStatus.collect { msg ->
+//            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+//        }
+//    }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
