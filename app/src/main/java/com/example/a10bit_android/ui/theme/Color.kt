@@ -18,3 +18,9 @@ val FooterTextColor = Color(rgb(224,224,224))
 val AuthBackground = Color(rgb(251,253,255))
 val HomeBackground = Color(rgb(238,240,244))
 val resetColor = Color(rgb(239,90,90))
+
+val iconOGColor = Color(rgb(125,125,125))
+val iconCheckColor = Color(rgb(52,98,135))
+
+val textOGColor = Color(rgb(54,71,70))
+val textCheckColor = Color(rgb(94,152,147))

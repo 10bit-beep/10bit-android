@@ -1,14 +1,13 @@
 package com.example.a10bit_android.feature.attendance
 
-import android.service.autofill.UserData
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.a10bit_android.data.UserRepository // Repository import
-import com.example.a10bit_android.network.atendance.AttendanceCheckReQuest
-import com.example.a10bit_android.network.atendance.AttendanceResetRequest
-import com.example.a10bit_android.network.atendance.AttendanceService
+import com.example.a10bit_android.network.attendance.AttendanceCheckReQuest
+import com.example.a10bit_android.network.attendance.AttendanceResetRequest
+import com.example.a10bit_android.network.attendance.AttendanceService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

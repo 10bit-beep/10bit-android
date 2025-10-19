@@ -1,6 +1,6 @@
 package com.example.a10bit_android.network.start
 
-import com.example.a10bit_android.network.atendance.AttendanceCheckService
+import com.example.a10bit_android.network.attendance.AttendanceService
 import com.example.a10bit_android.network.start.login.LoginService
 import com.example.a10bit_android.network.start.signup.SignUpService
 import com.example.a10bit_android.remote.BeepUrl
@@ -39,13 +39,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAttendanceCheckService(retrofit: Retrofit): AttendanceCheckService {
-        return retrofit.create(AttendanceCheckService::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun provideAttendanceRexsetService(retrofit: Retrofit): AttendanceResetService {
-        return retrofit.create(AttendanceResetService::class.java)
+    fun provideAttendanceService(retrofit: Retrofit): AttendanceService {
+        return retrofit.create(AttendanceService::class.java)
     }
 }

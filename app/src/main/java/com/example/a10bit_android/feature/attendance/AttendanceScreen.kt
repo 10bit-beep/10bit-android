@@ -33,6 +33,7 @@ import com.example.a10bit_android.R
 import com.example.a10bit_android.ui.component.button.AttendanceButton
 import android.widget.Toast
 import androidx.compose.ui.platform.LocalContext
+import com.example.a10bit_android.ui.component.navbar.HomeNavBar
 
 
 @Composable
@@ -148,8 +149,14 @@ fun AttendanceScreen (
 
                 Spacer(modifier = Modifier .height(20.dp))
             }
-
-
+        }
+        Box(modifier = Modifier
+            .align(Alignment.BottomCenter)
+            .fillMaxWidth() ) {
+            HomeNavBar(
+                navController = navController,
+                thisScreen = "Attendance"
+            )
         }
     }
 }

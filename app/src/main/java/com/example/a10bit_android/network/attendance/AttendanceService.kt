@@ -1,4 +1,4 @@
-package com.example.a10bit_android.network.atendance
+package com.example.a10bit_android.network.attendance
 
 import com.example.a10bit_android.remote.BeepUrl
 import retrofit2.http.Body
