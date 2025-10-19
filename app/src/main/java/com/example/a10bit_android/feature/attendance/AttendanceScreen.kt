@@ -31,7 +31,9 @@ import androidx.navigation.NavHostController
 import com.example.a10bit_android.ui.theme.HomeBackground
 import com.example.a10bit_android.R
 import com.example.a10bit_android.ui.component.button.AttendanceButton
-import com.example.a10bit_android.ui.theme.mainColor
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
+
 
 @Composable
 fun AttendanceScreen (
@@ -41,15 +43,20 @@ fun AttendanceScreen (
     var isChecked by remember { mutableStateOf(false) }
     val status by viewModel.attendanceStatus.collectAsState()
 
+    val context = LocalContext.current
+
+    //홈 배경 설정
     Box(modifier = Modifier
         .fillMaxSize()
         .background(HomeBackground)
     ) {
+        //전체
         Column(modifier = Modifier
             .align(Alignment.TopCenter)
         ) {
             Spacer(modifier = Modifier .height(60.dp))
 
+            //위에 바
             Box ( modifier = Modifier .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ){
@@ -79,9 +86,11 @@ fun AttendanceScreen (
 
             Spacer(modifier = Modifier .height(60.dp))
 
+            //박스
             Column( modifier = Modifier
                 .width(346.dp)
 //                .height(414.dp)
+                .align(Alignment.CenterHorizontally)
                 .background(Color.White, shape = RoundedCornerShape(8.dp))
             ) {
                 Spacer(modifier = Modifier .height(20.dp))
@@ -99,22 +108,48 @@ fun AttendanceScreen (
                 Image(painter = painterResource(R.drawable.phone_icon),
                     contentDescription = null,
                     modifier = Modifier
+                        .width(238.dp)
+                        .height(258.dp)
                         .align(Alignment.CenterHorizontally) )
 
                 Spacer(modifier = Modifier .height(18.dp))
 
-                AttendanceButton(
-                    buttonname = "출석하기",
-                    buttonColor = mainColor,
-                    onclick = {
-                        viewModel.startAttendance()
-                        if ( status == "출석 완료" ) {
-                            isChecked = true
-                        }
-                    },
-                    ischecked = isChecked
-                )
+                Box( modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                ) {
+                    AttendanceButton(
+                        firstname = "출석하기",
+                        secondname = "퇴실하기",
+                        onclickCheck = {
+                            Toast.makeText(context, "nfc태그를 인식해주세요.", Toast.LENGTH_LONG).show()
+
+                            viewModel.startAttendance()
+
+                            if ( status == "출석 완료" ) {
+                                Toast.makeText(context, "출석 완료", Toast.LENGTH_LONG).show()
+                                isChecked = true
+                            } else if (status == "출석 실패") {
+                                Toast.makeText(context, "출석 실패", Toast.LENGTH_LONG).show()
+                            }
+                        },
+                        onclickReset = {
+                            viewModel.startResetAttendance()
+
+                            if ( status == "출석 초기화 완료" ) {
+                                Toast.makeText(context, "퇴실 완료", Toast.LENGTH_LONG).show()
+                                isChecked = false
+                            } else if (status == "출석 초기화 실패") {
+                                Toast.makeText(context, "퇴실 실패", Toast.LENGTH_LONG).show()
+                            }
+                        },
+                        ischecked = isChecked
+                    )
+                }
+
+                Spacer(modifier = Modifier .height(20.dp))
             }
+
+
         }
     }
 }

@@ -117,7 +117,9 @@ fun LoginScreen(
                     if (usernameErrorType == LoginErrorType.NONE && passwordErrorType == LoginErrorType.NONE) {
                         loginViewModel.login(username, password)
                         if ( loginViewModel.loginSuccess.value == true ) {
-                            navController.navigate("home")
+                                navController.navigate("attendance") {
+                                    popUpTo("login") { inclusive = true }
+                                }
                         } else {
                             usernameErrorType = LoginErrorType.MISMATCH_COLOR
                             passwordErrorType = LoginErrorType.MISMATCH_TEXT

@@ -13,14 +13,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.a10bit_android.ui.theme.errorColor
+import com.example.a10bit_android.ui.theme.mainColor
+import com.example.a10bit_android.ui.theme.resetColor
 
 @Composable
 fun AttendanceButton (
-    buttonname: String,
-    buttonColor: Color,
-    onclick: () -> Unit,
-    ischecked: Boolean
+    firstname: String,
+    secondname: String,
+    onclickCheck: () -> Unit,
+    onclickReset: () -> Unit,
+    ischecked: Boolean,
 ) {
+    val buttonColor = if (ischecked) resetColor else mainColor
+    val buttonname = if (ischecked) secondname else firstname
+    val onclick = if (ischecked) onclickReset else onclickCheck
+
     Button(
         onClick = onclick,
         modifier = Modifier
@@ -29,7 +37,7 @@ fun AttendanceButton (
         shape = RoundedCornerShape(10.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = buttonColor,
-        contentColor = Color.White )
+        contentColor = Color.White)
     ) {
         Text(text = buttonname,
             fontSize = 20.sp,

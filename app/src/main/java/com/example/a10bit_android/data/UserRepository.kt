@@ -29,15 +29,14 @@ class UserRepository @Inject constructor(
 
     // 저장 함수: 모든 사용자 데이터를 DataStore에 저장
     suspend fun saveUserData(
-        publicId: String,
-        token: String,
-        isChecked: Boolean
+        publicId: String? = null,
+        token: String? = null,
+        isChecked: Boolean? = null
     ) {
         context.dataStore.edit { prefs ->
-            // 원래 코드의 저장 로직을 그대로 구현
-            prefs[PUBLIC_ID] = publicId
-            prefs[TOKEN] = token
-            prefs[IS_CHECKED] = isChecked
+            publicId?.let { prefs[PUBLIC_ID] = it }
+            token?.let { prefs[TOKEN] = it }
+            isChecked?.let { prefs[IS_CHECKED] = it }
         }
     }
 
