@@ -27,15 +27,15 @@ class LoginViewModel @Inject constructor (
     fun login(username: String, password: String) {
         viewModelScope.launch {
             try {
-                println("테스트용 로그인 성공 (요청 생략)")
-                _loginSuccess.value = true
-
-                userRepository.saveUserData(
-                    publicId = username,
-                    token = "test_token",
-                    isChecked = false
-                )
-                return@launch
+//                println("테스트용 로그인 성공 (요청 생략)")
+//                _loginSuccess.value = true
+//
+//                userRepository.saveUserData(
+//                    publicId = username,
+//                    token = "test_token",
+//                    isChecked = false
+//                )
+//                return@launch
 
                 // 로그인 요청 생성
                 val request = LoginReQuest(username, password)
